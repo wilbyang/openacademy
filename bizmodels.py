@@ -3,7 +3,7 @@
 from odoo import models, fields, api
 
 class Course(models.Model):
-    _name = 'sth.course'
+    _name = 'openacademy.course'
 
     name = fields.Char(string="Title", required=True)
     description = fields.Text()
@@ -12,10 +12,10 @@ class Course(models.Model):
     responsible_id = fields.Many2one('res.users',
         ondelete='set null', string="Responsible", index=True)
     session_ids = fields.One2many(
-        'sth.session', 'course_id', string="Sessions")
+        'openacademy.session', 'course_id', string="Sessions")
 
 class Session(models.Model):
-    _name = 'sth.session'
+    _name = 'openacademy.session'
 
     name = fields.Char(required=True)
     start_date = fields.Date()
@@ -25,7 +25,7 @@ class Session(models.Model):
 
     # relation
     instructor_id = fields.Many2one('res.partner', string="Instructor")
-    course_id = fields.Many2one('sth.course',
+    course_id = fields.Many2one('openacademy.course',
         ondelete='cascade', string="Course", required=True)
 
     #attendee_ids = fields.Many2many('res.partner', string="Attendees")
